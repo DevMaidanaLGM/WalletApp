@@ -10,6 +10,8 @@ use Tests\TestCase;
 
 class WalletTest extends TestCase
 {
+
+    use RefreshDatabase;
     /**
      * A basic feature test example.
      *
