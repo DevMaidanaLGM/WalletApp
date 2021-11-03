@@ -14,7 +14,7 @@ class CreateTransfersTable extends Migration
     public function up()
     {
         Schema::create('transfers', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->text('description');
             $table->float('amount');
             $table->integer('wallet_id')->unsigned();

@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Wallet extends Model
 {
     use HasFactory;
+
+    public function transfers(){
+        return $this->hasMany('App\Models\Transfer');
+    }
 }
