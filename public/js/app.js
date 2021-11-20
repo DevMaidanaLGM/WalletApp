@@ -2184,11 +2184,11 @@ function Example() {
       setState = _useState2[1];
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    // do anything only one time if you pass empty array []
-    // keep in mind, that component will be rendered one time (with default values) before we get here
-    console.log('render! Example');
-    console.log(state);
-    console.log("Mostrando on Change: " + onChangeHandler);
+    console.log('render example! state: ');
+    console.log({
+      state: state
+    });
+    console.log(state.form);
     axios__WEBPACK_IMPORTED_MODULE_4___default().get('http://127.0.0.1:8000/api/wallet').then(function (info) {
       setState({
         money: info.data.money,
@@ -2198,25 +2198,11 @@ function Example() {
       console.log(err);
     });
   }, []);
-  /*     useEffect(function () {
-          console.log('render! Example')
-          console.log(state)
-  
-          Axios.get('http://127.0.0.1:8000/api/wallet')
-          .then((info) => {
-              setState({
-  
-                  money: info.data.money,
-                  transfers: info.data.transfers
-  
-              })
-  
-          })
-          .catch((err) => {
-              console.log(err)
-          })
-  
-        }) */
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    console.log("Rendering..."); //Console log que muestra lo que va pasando con el form
+
+    console.log(state.form);
+  });
 
   function onChangeHandler(e) {
     setState({
@@ -2240,9 +2226,11 @@ function Example() {
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
             className: "col-md-12 my-3",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_TransferForm__WEBPACK_IMPORTED_MODULE_3__["default"], {
+            children: state.form ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_TransferForm__WEBPACK_IMPORTED_MODULE_3__["default"], {
               form: state.form,
               onChangeHandler: onChangeHandler
+            }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h2", {
+              children: "Loading..."
             })
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
@@ -2293,28 +2281,32 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-function TransferForm(form, onChangeHandler) {
-  //const TransferForm = ({form, onChange}) => (
+function TransferForm(_ref) {
+  var form = _ref.form,
+      onChangeHandler = _ref.onChangeHandler;
 
-  /*   useEffect(function () {
-        console.log('render transferForm!');
-        console.log(onChangeHandler.onChangeHandler);
-      }); */
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
       _useState2 = _slicedToArray(_useState, 2),
       input = _useState2[0],
       setInput = _useState2[1];
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    // do anything only one time if you pass empty array []
-    // keep in mind, that component will be rendered one time (with default values) before we get here
-    console.log('render transferForm!');
+    console.log('Rendering transferForm');
+    console.log('Form object: ');
+    console.log(form);
+    console.log('Form description: ');
+    console.log(form.description);
     console.log(onChangeHandler);
-    console.log(onChangeHandler.onChangeHandler);
   }, []);
 
+  function checkingForm() {
+    console.log("Checking form: ");
+    console.log(form.description);
+    return form.description;
+  }
+
   function _onChange(e) {
-    onChangeHandler.onChangeHandler(e);
+    onChangeHandler(e);
   }
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("form", {
@@ -2326,10 +2318,8 @@ function TransferForm(form, onChangeHandler) {
         className: "form-control",
         placeholder: "Description",
         name: "description",
-        value: form.description,
-        onChange: function onChange(e) {
-          return _onChange(e);
-        }
+        onChange: onChangeHandler,
+        value: form.description
       })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
       className: "input-group ms-sm-2 mb-2",
@@ -2343,10 +2333,10 @@ function TransferForm(form, onChangeHandler) {
         type: "text",
         className: "form-control",
         name: "amount",
-        value: form.amount,
         onChange: function onChange(e) {
           return _onChange(e);
-        }
+        },
+        value: form.amount
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
       type: "submit",

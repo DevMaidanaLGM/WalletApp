@@ -1,33 +1,37 @@
 import React, { useEffect,useState } from 'react';
 
 
-export default function TransferForm(form, onChangeHandler){
-//const TransferForm = ({form, onChange}) => (
-
-  /*   useEffect(function () {
-        console.log('render transferForm!');
-        console.log(onChangeHandler.onChangeHandler);
-      }); */
-
-
+export default function TransferForm({form, onChangeHandler}){
 
     const [input, setInput] = useState('')
 
     useEffect(() => {
 
-        // do anything only one time if you pass empty array []
-        // keep in mind, that component will be rendered one time (with default values) before we get here
-        console.log('render transferForm!');
+        console.log('Rendering transferForm')
+        console.log('Form object: ')
+        console.log(form);
+        console.log('Form description: ');
+        console.log(form.description);
         console.log(onChangeHandler);
-        console.log(onChangeHandler.onChangeHandler);
+
+
       }, [] )
 
-
-      function onChange (e){
-        onChangeHandler.onChangeHandler(e);
+      function checkingForm(){
+          console.log("Checking form: ")
+          console.log(form.description);
+          return form.description;
       }
 
+      function onChange (e){
+        onChangeHandler(e);
+      }
+
+
     return(
+
+
+
 <form className="form-inline justify-content-center">
                         <div className="form-goup mb-2">
                             <input
@@ -35,9 +39,9 @@ export default function TransferForm(form, onChangeHandler){
                                 className="form-control"
                                 placeholder="Description"
                                 name="description"
+                                onChange={onChangeHandler}
+
                                 value={form.description}
-                                onChange={
-                                    (e) => onChange(e)}
 
                             />
                         </div>
@@ -49,8 +53,8 @@ export default function TransferForm(form, onChangeHandler){
                                 type="text"
                                 className="form-control"
                                 name="amount"
-                                value={form.amount}
                                 onChange={(e) => onChange(e)}
+                                value={form.amount}
 
                             />
                         </div>
@@ -63,4 +67,5 @@ export default function TransferForm(form, onChangeHandler){
 
     </form>
 )
+
 }

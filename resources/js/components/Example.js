@@ -23,12 +23,11 @@ export default function Example() {
 
     useEffect(() => {
 
-        // do anything only one time if you pass empty array []
-        // keep in mind, that component will be rendered one time (with default values) before we get here
 
-        console.log('render! Example')
-        console.log(state)
-        console.log("Mostrando on Change: " + onChangeHandler)
+        console.log('render example! state: ')
+        console.log({state})
+        console.log(state.form)
+
         Axios.get('http://127.0.0.1:8000/api/wallet')
         .then((info) => {
             setState({
@@ -47,27 +46,11 @@ export default function Example() {
       }, [] )
 
 
-/*     useEffect(function () {
-        console.log('render! Example')
-        console.log(state)
 
-        Axios.get('http://127.0.0.1:8000/api/wallet')
-        .then((info) => {
-            setState({
-
-                money: info.data.money,
-                transfers: info.data.transfers
-
-            })
-
-        })
-        .catch((err) => {
-            console.log(err)
-        })
-
-      }) */
-
-
+      useEffect(() => {
+          console.log("Rendering...") //Console log que muestra lo que va pasando con el form
+          console.log(state.form)
+      })
 
 
 
@@ -82,6 +65,7 @@ export default function Example() {
     }
 
 
+
     return (
         <>
             <div className="container">
@@ -93,9 +77,13 @@ export default function Example() {
                     </div>
 
                     <div className="col-md-12 my-3">
+
+                        {state.form ?
                         <TransferForm
                         form={state.form}
                         onChangeHandler={onChangeHandler}></TransferForm>
+
+                     : <h2>Loading...</h2>}
                     </div>
 
                 </div>
