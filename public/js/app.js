@@ -2205,6 +2205,7 @@ function Example() {
   });
 
   function onChangeHandler(e) {
+    console.log("In the onChangeHandler");
     setState({
       form: _objectSpread(_objectSpread({}, state.form), {}, _defineProperty({}, e.target.name, e.target.value))
     });
@@ -2298,17 +2299,6 @@ function TransferForm(_ref) {
     console.log(form.description);
     console.log(onChangeHandler);
   }, []);
-
-  function checkingForm() {
-    console.log("Checking form: ");
-    console.log(form.description);
-    return form.description;
-  }
-
-  function _onChange(e) {
-    onChangeHandler(e);
-  }
-
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("form", {
     className: "form-inline justify-content-center",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
@@ -2333,9 +2323,19 @@ function TransferForm(_ref) {
         type: "text",
         className: "form-control",
         name: "amount",
-        onChange: function onChange(e) {
-          return _onChange(e);
-        },
+        onChange: function (_onChange) {
+          function onChange(_x) {
+            return _onChange.apply(this, arguments);
+          }
+
+          onChange.toString = function () {
+            return _onChange.toString();
+          };
+
+          return onChange;
+        }(function (e) {
+          return onChange(e);
+        }),
         value: form.amount
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {

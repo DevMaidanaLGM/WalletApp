@@ -17,17 +17,6 @@ export default function TransferForm({form, onChangeHandler}){
 
       }, [] )
 
-      function checkingForm(){
-          console.log("Checking form: ")
-          console.log(form.description);
-          return form.description;
-      }
-
-      function onChange (e){
-        onChangeHandler(e);
-      }
-
-
     return(
 
 
