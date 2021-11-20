@@ -13,6 +13,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this->call(WalletsTableSeeder::class);
+        $this->call(TransfersTableSeeder::class);
         // \App\Models\User::factory(10)->create();
     }
 }
