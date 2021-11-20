@@ -55,6 +55,7 @@ export default function Example() {
 
 
     function onChangeHandler(e){
+        console.log("In the onChangeHandler")
         setState({
             form: {
                 ...state.form,
